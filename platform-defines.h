@@ -1,0 +1,5 @@
+#ifndef OPENNSL_UNITS_MAX
+#define OPENNSL_UNITS_MAX 1
+#define OPENNSL_UNITS_MAX_ID (OPENNSL_UNITS_MAX - 1)
+#endif
+

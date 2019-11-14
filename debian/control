@@ -1,0 +1,27 @@
+Source: libfal-opennsl
+Section: net
+Priority: optional
+Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
+Build-Depends: debhelper (>= 9),
+ libvyattafal-dev,
+ libdpdk-dev,
+ libopennsl-dev,
+ libopennsl1,
+ pkg-config,
+ libinih-dev,
+ vyatta-dataplane-dev,
+ libvyatta-dpdk-swport-dev (>= 0.1.7),
+ libbsd-dev,
+Standards-Version: 3.9.8
+
+Package: libfal-opennsl1
+Architecture: any
+Depends:
+ libopennsl1,
+ python3,
+ python3-ufispace-bsp-utils,
+ bcm-linux-bde-modules-signed | bcm-linux-bde-modules-unsigned | bcm-linux-bde-modules,
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Broadcom forwarding abstraction layer integration based on OpenNSL
+ Broadcom switch FAL based on OpenNSL

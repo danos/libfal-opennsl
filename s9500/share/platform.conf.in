@@ -1,0 +1,47 @@
+#
+# Copyright(c) 2018-2019  AT&T Intellectual Property.
+# All rights reserved.
+#
+
+[broadcom]
+backplane_port1 = 2:0.0,31
+backplane_port2 = 2:0.1,32
+port_updown_script = /lib/vplane/s9500_port_updown
+generic_port_name1 = xe0
+generic_port_name2 = xe1
+generic_port_name3 = xe2
+generic_port_name4 = xe3
+generic_port_name5 = xe4
+generic_port_name6 = xe5
+generic_port_name7 = xe6
+generic_port_name8 = xe7
+generic_port_name9 = xe8
+generic_port_name10 = xe9
+generic_port_name11 = xe10
+generic_port_name12 = xe11
+generic_port_name13 = xe12
+generic_port_name14 = xe13
+generic_port_name15 = xe14
+generic_port_name16 = xe15
+generic_port_name17 = xe16
+generic_port_name18 = xe17
+generic_port_name19 = xe18
+generic_port_name20 = xe19
+generic_port_name21 = xe20
+generic_port_name22 = xe21
+generic_port_name23 = xe22
+generic_port_name24 = xe23
+generic_port_name25 = xe24
+generic_port_name26 = xe25
+generic_port_name27 = xe26
+generic_port_name28 = xe27
+generic_port_name29 = ce0
+generic_port_name30 = ce1
+
+[dataplane]
+fal_plugin = /usr/lib/libfal-opennsl.so.1
+backplane_port1 = 2:0.0
+backplane_port2 = 2:0.1
+
+[hardware-interface-features]
+firewall.local.switch_vif=1

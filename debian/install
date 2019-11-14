@@ -1,0 +1,4 @@
+libfal-opennsl.so.1 usr/lib
+s9500/share/* usr/share/vyatta/platform/s9500
+s9500/s9500_port_updown lib/vplane/
+lib/vyatta/platform usr/lib/python3/dist-packages/vyatta

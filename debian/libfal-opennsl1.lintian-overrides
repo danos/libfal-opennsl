@@ -1,0 +1,3 @@
+libfal-opennsl1: incorrect-libdir-in-la-file
+libfal-opennsl1: package-must-activate-ldconfig-trigger
+libfal-opennsl1: no-shlibs-control-file

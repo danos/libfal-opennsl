@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+import sys
+from SFP_utility import SFPUtility
+
+if len(sys.argv) != 3:
+    print("Usage: " + sys.argv[0] + " up|down <portname>")
+    sys.exit(1)
+
+if sys.argv[1] == 'up':
+    state = 0
+elif sys.argv[1] == 'down':
+    state = 1
+else:
+    print("Usage: " + sys.argv[0] + " up|down <portname>")
+    sys.exit(1)
+
+bcmPort = sys.argv[2]
+if bcmPort.startswith("xe"):
+    port = int(bcmPort[2:])
+    sfp = SFPUtility()
+    sfp.set_port_status(port, state)
+elif bcmPort.startswith("ce"):
+    port = int(bcmPort[2:])
+    # TODO: send command to QSFP port

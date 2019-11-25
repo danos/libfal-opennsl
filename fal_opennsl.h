@@ -188,7 +188,7 @@ struct fal_opennsl_chip_cfg {
 	 * backplane transmit framer
 	 */
 	int (*tx_backplane_framer)(void *sw_port,
-				   void *fal_info, struct rte_mbuf *mbuf);
+				   void *fal_info, struct rte_mbuf **mbuf);
 };
 
 struct fal_opennsl_rx_trap_type_setup {

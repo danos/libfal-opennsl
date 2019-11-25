@@ -97,32 +97,32 @@ extend_mbuf(struct rte_mbuf *mbuf) {
 }
 
 static int fal_opennsl_dpp_insert_hdrs(struct opennsl_port *port,
-									   struct rte_mbuf *mbuf)
+				       struct rte_mbuf **mbuf)
 {
 	int size = 0;
 	opennsl_port_t bport = fal_opennsl_pmd_port_get_port(port);
 
-    if (fal_opennsl_get_backplane_port() == 0) {	
-		if ((mbuf->ol_flags & PKT_TX_VLAN_PKT)) {
-			if (rte_vlan_insert(&mbuf)) {
+	if (fal_opennsl_get_backplane_port() == 0) {	
+		if (((*mbuf)->ol_flags & PKT_TX_VLAN_PKT)) {
+			if (rte_vlan_insert(mbuf)) {
 				ERROR("Failed to insert vlan for packet %p\n", mbuf);
 				return -ENOMEM;
 			}
 		}
-		mbuf->ol_flags &= ~PKT_TX_VLAN_PKT;
+		(*mbuf)->ol_flags &= ~PKT_TX_VLAN_PKT;
 
-		if (extend_mbuf(mbuf) < 0) {
+		if (extend_mbuf(*mbuf) < 0) {
 			opennsl_stats.tx_drops[TxDropAllocFail]++;
 			return -ENOMEM;
 		}
 	}
 
-	if ((size = insert_itmh(mbuf, bport)) < 0) {
+	if ((size = insert_itmh(*mbuf, bport)) < 0) {
 		opennsl_stats.tx_drops[TxDropPrependFail]++;
 		return -ENOMEM;
 	}
 
-	if ((size = insert_ptch(mbuf, bport)) < 0) {
+	if ((size = insert_ptch(*mbuf, bport)) < 0) {
 		opennsl_stats.tx_drops[TxDropPrependFail]++;
 		return -ENOMEM;
 	}
@@ -134,7 +134,7 @@ static int fal_opennsl_dpp_insert_hdrs(struct opennsl_port *port,
 
 static int fal_opennsl_insert_hdrs(void *sw_port __rte_unused,
 			       void *fal_info,
-			       struct rte_mbuf *buf)
+			       struct rte_mbuf **buf)
 {
 	struct opennsl_port *bport = fal_info;
 	int rc;

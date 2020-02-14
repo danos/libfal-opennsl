@@ -1,0 +1,75 @@
+[broadcom]
+# Not needed as built into opennsl:
+#config = /usr/share/vyatta/platform/as5916-54xks/config.bcm
+#rc = /usr/share/vyatta/platform/as5916-54xks/rc.soc
+port_updown_script = /lib/vplane/as5916_port_updown
+generic_port_name1 = xe0
+generic_port_name2 = xe1
+generic_port_name3 = xe2
+generic_port_name4 = xe3
+generic_port_name5 = xe4
+generic_port_name6 = xe5
+generic_port_name7 = xe6
+generic_port_name8 = xe7
+generic_port_name9 = xe8
+generic_port_name10 = xe9
+generic_port_name11 = xe10
+generic_port_name12 = xe11
+generic_port_name13 = xe12
+generic_port_name14 = xe13
+generic_port_name15 = xe14
+generic_port_name16 = xe15
+generic_port_name17 = xe16
+generic_port_name18 = xe17
+generic_port_name19 = xe18
+generic_port_name20 = xe19
+generic_port_name21 = xe20
+generic_port_name22 = xe21
+generic_port_name23 = xe22
+generic_port_name24 = xe23
+generic_port_name25 = xe24
+generic_port_name26 = xe25
+generic_port_name27 = xe26
+generic_port_name28 = xe27
+generic_port_name28 = xe27
+generic_port_name29 = xe28
+generic_port_name30 = xe29
+generic_port_name31 = xe30
+generic_port_name32 = xe31
+generic_port_name33 = xe32
+generic_port_name34 = xe33
+generic_port_name35 = xe34
+generic_port_name36 = xe35
+generic_port_name37 = xe36
+generic_port_name38 = xe37
+generic_port_name39 = xe38
+generic_port_name40 = xe39
+generic_port_name41 = xe40
+generic_port_name42 = xe41
+generic_port_name43 = xe42
+generic_port_name44 = xe43
+generic_port_name45 = xe44
+generic_port_name46 = xe45
+generic_port_name47 = xe46
+generic_port_name48 = xe47
+generic_port_name49 = ce0
+generic_port_name50 = ce1
+generic_port_name51 = ce2
+generic_port_name52 = ce3
+generic_port_name53 = ce4
+generic_port_name54 = ce5
+$mac_lines
+
+[dataplane]
+fal_plugin = /usr/lib/libfal-opennsl.so.1
+# Not connected
+backplane_port1 = 5:0.0
+backplane_port2 = 5:0.1
+
+[si-parameters]
+# Format port<port number>[:<lane>]_<speed>=<driver current>,<pre>,<main>,<post>
+# speed 0 are default values for when there is no other match
+
+[hardware-interface-features]
+firewall.local.switch_vif=1
+switch-group=1

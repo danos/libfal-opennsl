@@ -17,9 +17,10 @@ Standards-Version: 3.9.8
 Package: libfal-opennsl1
 Architecture: any
 Depends:
- libopennsl1,
+ libopennsl1 (>= 3.8.0.3-0vyatta3),
  python3,
  python3-ufispace-bsp-utils,
+ python3-accton-as5916-54xks-sfp-helper,
  bcm-linux-bde-modules-signed | bcm-linux-bde-modules-unsigned | bcm-linux-bde-modules,
  ${shlibs:Depends},
  ${misc:Depends},

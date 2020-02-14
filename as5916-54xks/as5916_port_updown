@@ -1,0 +1,19 @@
+#! /bin/sh
+
+if [ "$1" = "up" ]; then
+    state=1
+elif [ "$1" = "down" ]; then
+    state=0
+else
+    echo "Usage: $0 up|down <portname>"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "Usage: $0 up|down <portname>"
+    exit 1
+fi
+
+# Redirect output to /dev/null to avoid the OK result being dumped to
+# the journal by the FAL plugin
+vyatta-sfp-util --sfp-tx-state-set "$state" --port "$2" > /dev/null

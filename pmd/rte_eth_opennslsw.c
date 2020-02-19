@@ -179,7 +179,6 @@ static int opennsl_cmic_tx(int unit, opennsl_port_t port,
 		opennsl_stats.tx_drops[TxDropTxFail]++;
 		goto error;
 	}
-	return rv;
 
 error:
 	opennsl_pkt_free(unit, pkt);

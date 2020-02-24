@@ -1,3 +1,11 @@
+libfal-opennsl (2.3) unstable; urgency=medium
+
+  * Pass double-pointer to mbuf in framer API
+  * Add support for Accton AS5916-54XKS platform (Closes: VRVDR-49641)
+  * pmd: always free OpenNSL packet after TX
+
+ -- Robert Shearman <robert.shearman@att.com>  Mon, 24 Feb 2020 15:26:05 +0000
+
 libfal-opennsl (2.2) unstable; urgency=medium
 
   * DANOS Import master

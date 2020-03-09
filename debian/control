@@ -12,6 +12,7 @@ Build-Depends: debhelper (>= 9),
  vyatta-dataplane-dev,
  libvyatta-dpdk-swport-dev (>= 0.1.7),
  libbsd-dev,
+ fal-dev-l2-upd-port-status,
 Standards-Version: 3.9.8
 
 Package: libfal-opennsl1
@@ -21,6 +22,7 @@ Depends:
  python3,
  python3-ufispace-bsp-utils,
  python3-accton-as5916-54xks-sfp-helper,
+ fal-l2-upd-port-status,
  bcm-linux-bde-modules-signed | bcm-linux-bde-modules-unsigned | bcm-linux-bde-modules,
  ${shlibs:Depends},
  ${misc:Depends},

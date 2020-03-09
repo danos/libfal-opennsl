@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, AT&T Intellectual Property.
+ * Copyright (c) 2018-2020, AT&T Intellectual Property.
  * All rights reserved.
  */
 /*-
@@ -878,9 +878,10 @@ void fal_plugin_l2_new_port(unsigned int if_index,
 	}
 }
 
-void fal_plugin_l2_upd_port(unsigned int if_index,
-			    struct fal_attribute_t *attr)
+int fal_plugin_l2_upd_port(unsigned int if_index, struct fal_attribute_t *attr)
 {
+	int rc = 0;
+
 	INFO("%s(if_index %d, { id %d, ... })\n",
 	     __func__, if_index, attr->id);
 
@@ -899,7 +900,12 @@ void fal_plugin_l2_upd_port(unsigned int if_index,
 		else
 			fal_opennsl_enable_rx_framer(if_index, false);
 		break;
+	default:
+		rc = -EOPNOTSUPP;
+		break;
 	}
+
+	return rc;
 }
 
 void fal_plugin_l2_del_port(unsigned int if_index)

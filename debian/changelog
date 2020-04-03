@@ -1,3 +1,11 @@
+libfal-opennsl (2.4) unstable; urgency=medium
+
+  [ Mark Gillott ]
+  * FAL: update fal_plugin_l2_upd_port() to provide a return code
+    (Fixes: VRVDR-50107)
+
+ -- Robert Shearman <robert.shearman@att.com>  Fri, 03 Apr 2020 12:44:09 +0100
+
 libfal-opennsl (2.3) unstable; urgency=medium
 
   * Pass double-pointer to mbuf in framer API

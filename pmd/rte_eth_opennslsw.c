@@ -111,7 +111,7 @@ struct opennsl_port {
 	uint16_t		pvid;
 	void            *sw_port;
 
-	struct ether_addr address;
+	struct rte_ether_addr address;
 };
 
 #ifndef ETH_LINK_DOWN
@@ -571,9 +571,10 @@ eth_stats_get(struct rte_eth_dev *dev, struct rte_eth_stats *stats)
 	return 0;
 }
 
-static void
+static int
 eth_stats_reset(struct rte_eth_dev *dev)
 {
+	return 0;
 }
 
 static void
@@ -584,7 +585,7 @@ eth_mac_addr_remove(struct rte_eth_dev *dev __rte_unused,
 
 static int
 eth_mac_addr_add(struct rte_eth_dev *dev __rte_unused,
-	struct ether_addr *mac_addr __rte_unused,
+	struct rte_ether_addr *mac_addr __rte_unused,
 	uint32_t index __rte_unused,
 	uint32_t vmdq __rte_unused)
 {
@@ -594,7 +595,7 @@ eth_mac_addr_add(struct rte_eth_dev *dev __rte_unused,
 static int
 eth_mtu_set(struct rte_eth_dev *dev, uint16_t mtu)
 {
-	uint32_t max_frame = mtu + ETHER_HDR_LEN + ETHER_CRC_LEN;
+	uint32_t max_frame = mtu + RTE_ETHER_HDR_LEN + RTE_ETHER_CRC_LEN;
 	struct opennsl_port *bport = sw_port_fal_priv_from_dev(dev);
 	int unit = bport->unit;
 	opennsl_port_t port = bport->port;
@@ -624,7 +625,7 @@ eth_mtu_set(struct rte_eth_dev *dev, uint16_t mtu)
 	return 0;
 }
 
-static void
+static int
 eth_dev_infos_get(struct rte_eth_dev *dev,
 		  struct rte_eth_dev_info *dev_info)
 {
@@ -656,7 +657,7 @@ eth_dev_infos_get(struct rte_eth_dev *dev,
 	if (rv != OPENNSL_E_NONE) {
 		ERROR("BCM(%s) failed to get port abilities!\n",
 		      fal_opennsl_port_name(bport));
-		return;
+		return -ENOTSUP;
 	}
 
 	dev_info->speed_capa = 0;
@@ -670,13 +671,15 @@ eth_dev_infos_get(struct rte_eth_dev *dev,
 			dev_info->speed_capa |= ETH_LINK_SPEED_10M_HD;
 	if (ability_mask.speed_half_duplex & OPENNSL_PORT_ABILITY_100MB)
 			dev_info->speed_capa |= ETH_LINK_SPEED_100M_HD;
+
+	return 0;
 }
 
 static int
 eth_dev_configure(struct rte_eth_dev *dev)
 {
 	uint16_t mtu = dev->data->dev_conf.rxmode.max_rx_pkt_len -
-		ETHER_HDR_LEN - ETHER_CRC_LEN;
+		RTE_ETHER_HDR_LEN - RTE_ETHER_CRC_LEN;
 	return eth_mtu_set(dev, mtu);
 }
 
@@ -701,9 +704,9 @@ static inline void random_mac_addr(uint8_t *addr)
 	uint64_t rand = rte_rand();
 	uint8_t *p = (uint8_t*)&rand;
 
-	memcpy(addr, p, ETHER_ADDR_LEN);
-	addr[0] &= ~ETHER_GROUP_ADDR;       /* clear multicast bit */
-	addr[0] |= ETHER_LOCAL_ADMIN_ADDR;  /* set local assignment bit */
+	memcpy(addr, p, RTE_ETHER_ADDR_LEN);
+	addr[0] &= ~RTE_ETHER_GROUP_ADDR;       /* clear multicast bit */
+	addr[0] |= RTE_ETHER_LOCAL_ADMIN_ADDR;  /* set local assignment bit */
 }
 
 
@@ -764,7 +767,7 @@ static int fal_opennsl_create_swport(const char *name, int unit, opennsl_port_t 
 	swport.plugin_dev_ops = &eth_ops;
 	swport.plugin_private = *bport;
 	swport.prep_header_change = fal_prepare_for_header_change;
-	swport.prep_header_change_bytes = sizeof(struct ether_hdr);
+	swport.prep_header_change_bytes = sizeof(struct rte_ether_hdr);
 	swport.rx_queues = SW_P_PMD_MAX_RX_QUEUE;
 	swport.flags = SWITCH_PORT_FLAG_INTR_LSC;
 

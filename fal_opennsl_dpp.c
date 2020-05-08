@@ -83,7 +83,7 @@ static inline int insert_ptch(struct rte_mbuf *src, opennsl_port_t port)
 
 static int
 extend_mbuf(struct rte_mbuf *mbuf) {
-	int min_sz = ETHER_MIN_LEN - ETHER_CRC_LEN;
+	int min_sz = RTE_ETHER_MIN_LEN - RTE_ETHER_CRC_LEN;
 	int pkt_sz = rte_pktmbuf_data_len(mbuf);
 	int sz = pkt_sz > min_sz ? pkt_sz : min_sz;
 	if (sz != min_sz)

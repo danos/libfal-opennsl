@@ -488,7 +488,7 @@ fal_opennsl_convert_pkt_to_mbuf(int unit, struct rte_mbuf *dest, opennsl_pkt_t *
 	int pkt_start = src->tot_len - src->pkt_len;
 
 	if (fal_opennsl_chip_cfg[unit]->crc_trim)
-		cpy_len = cpy_len - ETHER_CRC_LEN - pkt_start;
+		cpy_len = cpy_len - RTE_ETHER_CRC_LEN - pkt_start;
 	else
 		cpy_len = cpy_len - pkt_start;
 

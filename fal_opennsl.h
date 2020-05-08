@@ -226,7 +226,7 @@ void fal_plugin_opennsl_fdb(FILE *f, int argc, char **argv);
 void fal_plugin_opennsl_shell_cmd(FILE *f, int argc, char **argv);
 
 int fal_opennsl_lookup_l2_addr(int unit, uint16_t vlanid,
-			   const struct ether_addr *dst,
+			   const struct rte_ether_addr *dst,
 			   opennsl_port_t *port, bool *is_static);
 
 int fal_opennsl_vlan_get_ucast_flood_group(int unit, uint32_t vlan,

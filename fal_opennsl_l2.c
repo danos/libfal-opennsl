@@ -535,7 +535,7 @@ void fal_plugin_br_del_port(unsigned int bridge_ifindex, unsigned int child_ifin
 
 static int
 fal_opennsl_add_update_l2_addr(int unit, uint16_t vlanid,
-			   const struct ether_addr *dst,
+			   const struct rte_ether_addr *dst,
 			   opennsl_gport_t port, bool update)
 {
 	opennsl_l2_addr_t l2_addr;
@@ -551,7 +551,7 @@ fal_opennsl_add_update_l2_addr(int unit, uint16_t vlanid,
 
 static int
 fal_opennsl_delete_l2_addr(int unit, uint16_t vlanid,
-		       const struct ether_addr *dst)
+		       const struct rte_ether_addr *dst)
 {
 	opennsl_mac_t opennsl_mac;
 
@@ -561,7 +561,7 @@ fal_opennsl_delete_l2_addr(int unit, uint16_t vlanid,
 
 int
 fal_opennsl_lookup_l2_addr(int unit, uint16_t vlanid,
-		       const struct ether_addr *dst,
+		       const struct rte_ether_addr *dst,
 		       opennsl_gport_t *port, bool *is_static)
 {
 	opennsl_l2_addr_t l2_addr;
@@ -579,18 +579,18 @@ fal_opennsl_lookup_l2_addr(int unit, uint16_t vlanid,
 }
 
 void fal_plugin_br_new_neigh(unsigned int child_ifindex, uint16_t vlanid,
-			     const struct ether_addr *dst,
+			     const struct rte_ether_addr *dst,
 			     uint32_t attr_count,
 			     const struct fal_attribute_t *attr_list)
 {
-	char addrstr[ETHER_ADDR_FMT_SIZE];
+	char addrstr[RTE_ETHER_ADDR_FMT_SIZE];
 	uint16_t state = 0;
 	opennsl_gport_t gport;
 	int unit;
 	int rv;
 	int i;
 
-	ether_format_addr(addrstr, ETHER_ADDR_FMT_SIZE, dst);
+	rte_ether_format_addr(addrstr, RTE_ETHER_ADDR_FMT_SIZE, dst);
 	INFO("%s(child_ifindex %u, vlanid %hu, ethaddr %s)\n",
 	     __func__, child_ifindex, vlanid, addrstr);
 
@@ -631,17 +631,17 @@ void fal_plugin_br_new_neigh(unsigned int child_ifindex, uint16_t vlanid,
 }
 
 void fal_plugin_br_upd_neigh(unsigned int child_ifindex, uint16_t vlanid,
-			     const struct ether_addr *dst,
+			     const struct rte_ether_addr *dst,
 			     struct fal_attribute_t *attr)
 {
-	char addrstr[ETHER_ADDR_FMT_SIZE];
+	char addrstr[RTE_ETHER_ADDR_FMT_SIZE];
 	uint16_t state = 0;
 	opennsl_gport_t gport;
 	bool is_static;
 	int unit;
 	int rv;
 
-	ether_format_addr(addrstr, ETHER_ADDR_FMT_SIZE, dst);
+	rte_ether_format_addr(addrstr, RTE_ETHER_ADDR_FMT_SIZE, dst);
 	INFO("%s(child_ifindex %u, vlanid %hu, ethaddr %s)\n",
 	     __func__, child_ifindex, vlanid, addrstr);
 
@@ -702,15 +702,15 @@ void fal_plugin_br_upd_neigh(unsigned int child_ifindex, uint16_t vlanid,
 }
 
 void fal_plugin_br_del_neigh(unsigned int child_ifindex, uint16_t vlanid,
-			     const struct ether_addr *dst)
+			     const struct rte_ether_addr *dst)
 {
-	char addrstr[ETHER_ADDR_FMT_SIZE];
+	char addrstr[RTE_ETHER_ADDR_FMT_SIZE];
 	opennsl_gport_t gport;
 	bool is_static;
 	int unit;
 	int rv;
 
-	ether_format_addr(addrstr, ETHER_ADDR_FMT_SIZE, dst);
+	rte_ether_format_addr(addrstr, RTE_ETHER_ADDR_FMT_SIZE, dst);
 	INFO("%s(child_ifindex %u, vlanid %hu, ethaddr %s)\n",
 	     __func__, child_ifindex, vlanid, addrstr);
 

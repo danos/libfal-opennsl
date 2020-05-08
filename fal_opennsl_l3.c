@@ -51,7 +51,7 @@ struct fal_opennsl_l3_neigh {
 
 	/* does this neighbour have forwarding information? */
 	bool complete;
-	struct ether_addr mac_addr;
+	struct rte_ether_addr mac_addr;
 	opennsl_if_t encap_id;
 	opennsl_gport_t out_gport;
 
@@ -289,7 +289,7 @@ RB_GENERATE_STATIC(fal_opennsl_l3_intf_vlan_tree, fal_opennsl_l3_intf, vlan_link
  */
 static int
 fal_opennsl_new_l3_intf(uint32_t ifindex, uint32_t parent_ifindex,
-			uint16_t vlan, const struct ether_addr *mac_addr,
+			uint16_t vlan, const struct rte_ether_addr *mac_addr,
 			uint32_t vrf, uint16_t mtu, fal_object_t *obj)
 {
 	opennsl_rx_mtu_config_t rif_mtu_cfg;
@@ -309,7 +309,7 @@ fal_opennsl_new_l3_intf(uint32_t ifindex, uint32_t parent_ifindex,
 	if (!intf)
 		return -ENOMEM;
 
-	ether_format_addr(buf, sizeof(buf), mac_addr);
+	rte_ether_format_addr(buf, sizeof(buf), mac_addr);
 	INFO("%s(%d, %d, %d, %s, %d, %d)\n",
 	     __func__, ifindex, parent_ifindex, vlan,
 	     buf, vrf, mtu);
@@ -498,7 +498,7 @@ fal_opennsl_upd_l3_intf_mtu(struct fal_opennsl_l3_intf *entry, uint32_t mtu)
 
 static int
 fal_opennsl_upd_l3_intf_mac_addr(struct fal_opennsl_l3_intf *entry,
-				 const struct ether_addr *mac)
+				 const struct rte_ether_addr *mac)
 {
 	ERROR("%s: Updating interface %d mac address not implemented\n",
 	      __func__, entry->ifindex);
@@ -801,7 +801,7 @@ fal_opennsl_l3_neigh_update_port(
 			return rv;
 		OPENNSL_GPORT_MCAST_SET(neigh->out_gport, mac_ucast_flood_group);
 
-		ether_format_addr(eth_buf, sizeof(eth_buf), &neigh->mac_addr);
+		rte_ether_format_addr(eth_buf, sizeof(eth_buf), &neigh->mac_addr);
 		INFO("no port for neighbour %s intf %d (MAC %s vlan %d) - flooding to 0x%x\n",
 		     fal_opennsl_ip_addr2a(buf, sizeof(buf), &neigh->ipaddr),
 		     neigh->ifindex, eth_buf, vlan, neigh->out_gport);
@@ -879,7 +879,7 @@ fal_opennsl_l3_neigh_update_port_w_deps(struct fal_opennsl_l3_neigh *neigh)
  */
 static int
 fal_opennsl_set_l3_neigh_mac(struct fal_opennsl_l3_neigh *neigh,
-			 const struct ether_addr *mac_addr)
+			 const struct rte_ether_addr *mac_addr)
 {
 	struct fal_opennsl_l3_encap_param l3_enc = { 0 };
 	struct fal_opennsl_l3_neigh *old;
@@ -1002,8 +1002,8 @@ fal_opennsl_l3_neigh_l2_addr_cb(int unit, opennsl_l2_addr_t *info,
 		return;
 	}
 
-	ether_format_addr(buf, sizeof(buf),
-			  (struct ether_addr *)&info->mac);
+	rte_ether_format_addr(buf, sizeof(buf),
+			  (struct rte_ether_addr *)&info->mac);
 	INFO("%s: MAC=%s VLAN=%d port=0x%x flags=0x%x operation=%d\n",
 	     __func__, buf, info->vid, info->port, info->flags,
 	     operation);
@@ -1052,7 +1052,7 @@ int fal_plugin_create_router_interface(uint32_t attr_count,
 				       struct fal_attribute_t *attr_list,
 				       fal_object_t *obj)
 {
-	const struct ether_addr *mac_addr = NULL;
+	const struct rte_ether_addr *mac_addr = NULL;
 	uint32_t parent_ifindex = 0;
 	uint32_t if_index = 0;
 	uint16_t vlan = 0;
@@ -1157,7 +1157,7 @@ int fal_plugin_ip_new_neigh(unsigned int ifindex,
 			    uint32_t attr_count,
 			    const struct fal_attribute_t *attr_list)
 {
-	const struct ether_addr *mac_addr = NULL;
+	const struct rte_ether_addr *mac_addr = NULL;
 	struct fal_opennsl_l3_neigh *neigh;
 	char buf[FAL_OPENNSL_IP_ADDR_LEN];
 	opennsl_if_t l3_intf_id;
@@ -1242,7 +1242,7 @@ int fal_plugin_ip_upd_neigh(unsigned int ifindex,
 			    struct fal_ip_address_t *ipaddr,
 			    struct fal_attribute_t *attr)
 {
-	const struct ether_addr *mac_addr = NULL;
+	const struct rte_ether_addr *mac_addr = NULL;
 	struct fal_opennsl_l3_neigh *neigh;
 	char buf[FAL_OPENNSL_IP_ADDR_LEN];
 	int rv;

@@ -3,7 +3,7 @@ Section: net
 Priority: optional
 Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
 Build-Depends: debhelper (>= 9),
- libvyattafal-dev,
+ libvyattafal-dev (>= 3.10.0),
  libdpdk-dev (>= 19.11),
  libopennsl-dev,
  libopennsl1,

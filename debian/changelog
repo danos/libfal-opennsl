@@ -1,3 +1,11 @@
+libfal-opennsl (2.5) unstable; urgency=medium
+
+  [ Charles (Chas) Williams ]
+  * dpdk: 19.11: update for API changes (Bugfix: VRVDR-45636)
+  * dpdk: 19.11: update dependency for API changes (Bugfix: VRVDR-45636)
+
+ -- Robert Shearman <robert.shearman@att.com>  Mon, 11 May 2020 16:28:47 +0100
+
 libfal-opennsl (2.4) unstable; urgency=medium
 
   [ Mark Gillott ]

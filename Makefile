@@ -10,6 +10,7 @@ LDFLAGS += -Wl,--as-needed -Wl,--version-script=fal_opennsl.sym \
 	$(shell pkg-config --libs libdpdk) \
 	$(shell pkg-config --libs opennsl) \
 	$(shell pkg-config --libs vyatta-dpdk-swport) \
+	-lrte_pmd_ixgbe \
 	-linih
 
 CFILES := \

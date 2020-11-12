@@ -1,3 +1,10 @@
+libfal-opennsl (2.6) unstable; urgency=medium
+
+  [ Nicholas Brown ]
+  * Explicitly link against the rte_pmd_ixgbe library
+
+ -- Robert Shearman <robert.shearman@att.com>  Thu, 12 Nov 2020 18:19:24 +0000
+
 libfal-opennsl (2.5) unstable; urgency=medium
 
   [ Charles (Chas) Williams ]

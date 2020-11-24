@@ -45,3 +45,4 @@ backplane_port2 = 2:0.1
 
 [hardware-interface-features]
 firewall.local.switch_vif=1
+switch-group=1

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, AT&T Intellectual Property. All rights reserved.
+ * Copyright (c) 2018-2021, AT&T Intellectual Property. All rights reserved.
  * Copyright(c) 2016 Brocade Communications Systems
  * Adapted from DPDK ring PMD licensed as below:
  *
@@ -508,7 +508,7 @@ done:
 	return -1;
 }
 
-static void
+static int
 eth_dev_stop(struct rte_eth_dev *dev)
 {
 	struct opennsl_port *bport = sw_port_fal_priv_from_dev(dev);
@@ -535,10 +535,11 @@ eth_dev_stop(struct rte_eth_dev *dev)
 	INIT_CHECK(opennsl_port_selective_set(unit, port, &info),
 			   "Port settings");
 
-	return;
+	return 0;
 done:
 	ERROR("port %s, failed to initialize: %s\n",
 		  opennsl_port_name(unit, port), msg);
+	return -EINVAL;
 }
 
 static int

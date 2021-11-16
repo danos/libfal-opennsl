@@ -578,7 +578,7 @@ static int fal_opennsl_rx_free(int unit, void *pkt_buf)
 static struct rte_mempool *fal_opennsl_create_unit_rx_pool(int unit)
 {
 	char name[RTE_MEMPOOL_NAMESIZE];
-	snprintf(name, RTE_MEMPOOL_NAMESIZE, "opennsl_rx_unit_%u",
+	snprintf(name, RTE_MEMPOOL_NAMESIZE, "opennsl_rxunit_%u",
 		(unsigned int)unit);
 	struct rte_mempool *mp;
 

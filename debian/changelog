@@ -1,3 +1,10 @@
+libfal-opennsl (2.9) unstable; urgency=medium
+
+  [ Gavin Shearer ]
+  * Reduce size of mempool name to avoid possible truncation
+
+ -- Charles (Chas) Williams <ciwillia@vyatta.att-mail.com>  Tue, 16 Nov 2021 14:49:55 -0500
+
 libfal-opennsl (2.8) unstable; urgency=medium
 
   * dpdk: changes for version 20.11 (Bugfix: VRVDR-54129)
